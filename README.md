@@ -71,7 +71,7 @@ Both model is trained using the [Tensorflow Object Detection](https://github.com
 
 - False positives
 
-![Detection error 2](samples/figure_detection_outputs/PL0bHKk6wuUGL_Qd34mf0XsQnyiDk2OeGR_024_BkknXGYLZjg-0027.jpg)
+![Detection error 3](samples/figure_detection_outputs/PL0bHKk6wuUGL_Qd34mf0XsQnyiDk2OeGR_024_BkknXGYLZjg-0027.jpg)
 
 ## Anime related repos and datasets
 
@@ -83,6 +83,8 @@ Create anime portraits at [Crypko](https://crypko.ai/) and [MakeGirlsMoe](https:
 
 The all-encompassing anime dataset [Danbooru2017](https://www.gwern.net/Danbooru2017) by gwern.
 
+My hand-curated [sketch-colored image dataset](https://github.com/jerryli27/pixiv_dataset).
+
 ## Common questions
 
 #### What's the use case?
@@ -90,10 +92,10 @@ The all-encompassing anime dataset [Danbooru2017](https://www.gwern.net/Danbooru
 Getting clean data is hard. The object detectors provided here can make that process easier. For example it can be used to crop faces from the [Danbooru2017](https://www.gwern.net/Danbooru2017) dataset. Here we show some sample results of combining the two mdoels:
 
 ![use case 1](samples/use_cases/face_sample_0_0_1526222796.png)
-![use case 1](samples/use_cases/face_sample_0_0_1526222838.png)
-![use case 1](samples/use_cases/face_sample_0_0_1526222842.png)
-![use case 1](samples/use_cases/face_sample_0_0_1526222843.png)
-![use case 1](samples/use_cases/face_sample_0_0_1526222795.png)
+![use case 2](samples/use_cases/face_sample_0_0_1526222838.png)
+![use case 3](samples/use_cases/face_sample_0_0_1526222842.png)
+![use case 4](samples/use_cases/face_sample_0_0_1526222843.png)
+![use case 5](samples/use_cases/face_sample_0_0_1526222795.png)
 
 #### Results are too noisy
 
