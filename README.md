@@ -54,7 +54,9 @@ For figure segmentation model, please point `--inference_graph` to the segmentat
 
 The Face Detection is trained on the outputs of [animeface-2009](https://github.com/nagadomi/animeface-2009) detector, which is under the MIT license. The main motivation for a tensorflow version is for **a much faster GPU-based detection** (5-10x speedup). 
 
-The Figure Segmentation model is trained on our [TODO figure segmentation dataset](), which you can download [TODO here]().
+The Figure Segmentation model is trained on a manually annotated dataset, which you can download [here](https://drive.google.com/open?id=1fnFbRQKuAUlfgVZnLEapg-rI_Zz5_H5D). Note some images are NSFW. We release this dataset purely for research. **Please use at your own risk.**
+
+To train the model, we overlayed segmented anime figures on top of pure background images to create an artificial dataset. We found this gives a decent performance. You can find pure background images in the [Danbooru 2018](https://www.gwern.net/Danbooru2018) dataset. Please contact us if you'd like to use our pre-generated tfrecords.
 
 Both model is trained using the [Tensorflow Object Detection](https://github.com/tensorflow/models/tree/master/research/object_detection) repo. Our repo is a simplified fork of that.
 
@@ -107,9 +109,6 @@ Higher threshold means more accurate results but also more false negatives (high
 
 Inference using CPU is slow. Please make sure you have a GPU/TPU. 
 
-If you want to create a full dataset using this model, we recommend following [TODO this guide](). 
+#### Citation
 
-## Todo items
-
-- clean up code for creating tfrecords using the object detection model.
-- provide figure segmentation dataset
+If you decide to use our model and/or data, we ask you to kindly cite this repo. Have fun!
