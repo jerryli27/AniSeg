@@ -20,6 +20,12 @@ tf.flags.DEFINE_string('output_path', None,
                        'Path to the output TFRecord.')
 tf.flags.DEFINE_boolean('visualize_inference', False,
                         'If set, also outputs the annotated inference result image.')
+tf.flags.DEFINE_boolean('output_cropped_image', False,
+                        'If set, also outputs the cropped image to the output path. e.g. '
+                        'OUTPUT_PATH/IMAGE_NAME_crop.png.')
+tf.flags.DEFINE_boolean('only_output_cropped_single_object', False,
+                        'Only used if FLAGS.output_cropped_image is True. Only outputs the cropped image if there is '
+                        'one and only one object detected.')
 
 tf.flags.DEFINE_string('inference_graph', None,
                        'Path to the inference graph with embedded weights.')
@@ -89,6 +95,25 @@ def main(_):
       min_score_thresh=FLAGS.min_score_thresh,
       visualize_inference=FLAGS.visualize_inference,
       feed_dict={image_ph: image_np})
+
+    if FLAGS.output_cropped_image:
+      if FLAGS.only_output_cropped_single_person and len(result["detection_score"]) == 1:
+        num_outputs = 1
+      else:
+        num_outputs = len(result["detection_score"])
+
+      for crop_i in range(0, num_outputs):
+        if (result["detection_score"])[crop_i] > FLAGS.min_score_thresh:
+          base, ext = os.path.splitext(os.path.basename(image_path))
+          output_crop = os.path.join(FLAGS.output_path, base + '_crop_%d.png' %crop_i)
+          idims = image_np.shape  # np array with shape (height, width, num_color(1, 3, or 4))
+          min_x = int(min(round(result["detection_bbox_xmin"][crop_i] * idims[1]), idims[1]))
+          max_x = int(min(round(result["detection_bbox_xmax"][crop_i] * idims[1]), idims[1]))
+          min_y = int(min(round(result["detection_bbox_ymin"][crop_i] * idims[0]), idims[0]))
+          max_y = int(min(round(result["detection_bbox_ymax"][crop_i] * idims[0]), idims[0]))
+          image_cropped = image_np[min_y:max_y, min_x:max_x, :]
+          util_io.imsave(output_crop, image_cropped)
+
     if FLAGS.visualize_inference:
       output_image = os.path.join(FLAGS.output_path, os.path.basename(image_path))
       util_io.imsave(output_image, result['annotated_image'])
