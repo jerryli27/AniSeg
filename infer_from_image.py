@@ -97,7 +97,7 @@ def main(_):
       feed_dict={image_ph: image_np})
 
     if FLAGS.output_cropped_image:
-      if FLAGS.only_output_cropped_single_person and len(result["detection_score"]) == 1:
+      if FLAGS.only_output_cropped_single_object and len(result["detection_score"]) == 1:
         num_outputs = 1
       else:
         num_outputs = len(result["detection_score"])
